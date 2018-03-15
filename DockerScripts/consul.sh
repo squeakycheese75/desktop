@@ -1,5 +1,6 @@
 echo 'Running consul primary'
 docker run -d --name=dev-consul -e CONSUL_BIND_INTERFACE=eth0 consul
+#docker start dev-consul
 echo 'Joining 2nd node'
 docker run -d -e CONSUL_BIND_INTERFACE=eth0 consul agent -dev -join=docker inspect --format='{{.NetworkSettings.Networks.bridge.IPAddress}}' dev-consul
 echo 'Joining 3rd node'
